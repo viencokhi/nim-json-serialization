@@ -2,6 +2,9 @@ import
   typetraits,
   faststreams/output_stream, serialization, json
 
+import
+  stew/shims/macros
+
 type
   JsonWriterState = enum
     RecordExpected
@@ -136,7 +139,17 @@ proc writeValue*(w: var JsonWriter, value: auto) =
     if value == nil:
       append "null"
     else:
-      writeValue(w, value[])
+      when value[] is object:
+        w.beginRecord(type(value))
+        type RecordType = type value
+        value.enumInstanceSerializedFields(fieldName, field):
+          type FieldType = type field
+          w.writeFieldName(fieldName)
+          w.writeFieldIMPL(FieldTag[RecordType, fieldName, FieldType], field, value)
+          w.state = AfterField
+        w.endRecord()
+      else:
+        writeValue(w, value[])
   elif value is string|cstring:
     append '"'
 
