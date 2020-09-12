@@ -1,5 +1,6 @@
 import
   serialization, json_serialization/[reader, writer]
+import strenc
 
 export
   serialization, reader, writer

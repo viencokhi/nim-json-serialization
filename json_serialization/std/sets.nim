@@ -1,3 +1,4 @@
+import strenc
 import stew/shims/sets, ../../json_serialization/[reader, writer, lexer]
 export sets
 

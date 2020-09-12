@@ -1,3 +1,4 @@
+import strenc
 import std/options, ../../json_serialization/[reader, writer, lexer]
 export options
 

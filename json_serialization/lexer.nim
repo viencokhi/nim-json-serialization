@@ -1,3 +1,4 @@
+import strenc
 import
   unicode, json,
   faststreams/inputs,

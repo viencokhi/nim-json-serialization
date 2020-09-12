@@ -1,3 +1,4 @@
+import strenc
 import
   std/strutils, stew/shims/net,
   ../../json_serialization, chronos/transports/common
